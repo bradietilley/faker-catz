@@ -1,11 +1,11 @@
 {
-  "name": "bradietilley/catz",
+  "name": "bradietilley/faker-catz",
   "description": "Faker for cat profile pics",
   "type": "library",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "BradieTilley\\Catz\\": "src/"
+      "BradieTilley\\FakerCatz\\": "src/"
     },
     "files": [
         "src/functions.php"

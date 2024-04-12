@@ -1,6 +1,6 @@
 <?php
 
-use BradieTilley\Catz\Catz;
+use BradieTilley\FakerCatz\Catz;
 use Illuminate\Support\Collection;
 
 test('catz helper function loads a singleton instance of Catz', function () {

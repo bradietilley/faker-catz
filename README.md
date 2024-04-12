@@ -1,20 +1,20 @@
-# Skeleton Package
+# Catz
 
-...
+Your one-stop-shop for fake avatars - but cats!
 
-![Static Analysis](https://github.com/bradietilley/skeleton-package/actions/workflows/static.yml/badge.svg)
-![Tests](https://github.com/bradietilley/skeleton-package/actions/workflows/tests.yml/badge.svg)
+![Static Analysis](https://github.com/bradietilley/faker-catz/actions/workflows/static.yml/badge.svg)
+![Tests](https://github.com/bradietilley/faker-catz/actions/workflows/tests.yml/badge.svg)
 
 
 ## Introduction
 
-...
+
 
 
 ## Installation
 
 ```
-composer require bradietilley/skeleton-package
+composer require bradietilley/faker-catz
 ```
 
 

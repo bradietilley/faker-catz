@@ -1,9 +1,10 @@
 <?php
 
-namespace BradieTilley\Catz;
+namespace BradieTilley\FakerCatz;
 
-use BradieTilley\Catz\Exceptions\CatzImageException;
+use BradieTilley\FakerCatz\Exceptions\CatzImageException;
 use Illuminate\Support\Collection;
+use SplFileInfo;
 
 class Catz
 {
@@ -59,7 +60,7 @@ class Catz
      */
     public function path(): string
     {
-        return $this->refeed()->next()->getCurrentImagePath();
+        return $this->refeed()->iterate()->getCurrentImagePath();
     }
 
     /**
@@ -67,7 +68,15 @@ class Catz
      */
     public function contents(): string
     {
-        return $this->refeed()->next()->getCurrentImageContents();
+        return $this->refeed()->iterate()->getCurrentImageContents();
+    }
+
+    /**
+     * Get the next image as an instance of SplFileInfo
+     */
+    public function fileinfo(): SplFileInfo
+    {
+        return new SplFileInfo($this->path());
     }
 
     /**
@@ -76,7 +85,7 @@ class Catz
     public function getCurrentImagePath(): string
     {
         if ($this->current === null) {
-            $this->next();
+            $this->iterate();
         }
 
         return $this->current ?? throw CatzImageException::make('Unable to load catz image path');
@@ -93,7 +102,7 @@ class Catz
     /**
      * Cycle to the next cat
      */
-    public function next(): static
+    public function iterate(): static
     {
         /** @phpstan-ignore-next-line */
         $this->current = array_pop($this->pool);

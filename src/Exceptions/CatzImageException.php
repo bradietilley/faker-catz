@@ -1,6 +1,6 @@
 <?php
 
-namespace BradieTilley\Catz\Exceptions;
+namespace BradieTilley\FakerCatz\Exceptions;
 
 use Exception;
 
