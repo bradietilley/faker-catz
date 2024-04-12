@@ -10,7 +10,7 @@ test('catz helper function loads a singleton instance of Catz', function () {
 
 test('catz can load all cat pics', function () {
     $min = 1;
-    $max = 120;
+    $max = 128;
 
     $expect = Collection::range($min, $max)
         ->map(fn (int $i) => 'cat_'.str_pad($i, 4, '0', STR_PAD_LEFT).'.jpg')
