@@ -10,6 +10,8 @@ Your one-stop-shop for fake avatars - but cats!
 
 FakerCatz is a lightweight PHP package designed to generate fake cat images that can be used for a variety of purposes, like avatars and other placeholders for web development *purr*poses.
 
+All images are 512*512 60% quality JPEGs (compared to their original 1024x1024 100% quality PNGs) equating to roughly
+
 
 ## Installation
 
@@ -48,6 +50,21 @@ catz()->fileinfo();                         // \SplInfo: <fileinfo of /path/to/p
 catz()->fileinfo();                         // \SplInfo: <fileinfo of /path/to/pics/catz_0099.jpg>
 ```
 
+
+**Get exact cat**
+
+Have a favorite? Get specific ones every time:
+
+```php
+catz()->get(24);                            // string: /path/to/pics/cat_0024.jpg
+catz()->get(43);                            // string: /path/to/pics/cat_0043.jpg
+```
+
+**Get count of cats**
+
+```php
+catz()->count();                            // integer: 120                                         (currently there's 120 cats)
+```
 
 **Randomisation / Shuffling**
 

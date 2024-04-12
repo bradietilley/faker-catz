@@ -56,6 +56,33 @@ class Catz
     }
 
     /**
+     * Get the number of cats
+     */
+    public function count(): int
+    {
+        if ($this->all === null) {
+            $this->load();
+        }
+
+        return count($this->all);
+    }
+
+    /**
+     * Get a cat by fixed number.
+     *
+     * Example: 1 matches cat_0001.jpeg
+     * Example: 120 matches cat_0120.jpeg
+     */
+    public function get(int $number): string
+    {
+        if ($this->all === null) {
+            $this->load();
+        }
+
+        return $this->all[$number - 1] ?? throw CatzImageException::make('Unable to find image #'.$number);
+    }
+
+    /**
      * Get the next image's path
      */
     public function path(): string
