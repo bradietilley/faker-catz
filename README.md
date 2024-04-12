@@ -65,7 +65,7 @@ catz()->get(43);                            // string: /path/to/pics/cat_0043.jp
 **Get count of cats**
 
 ```php
-catz()->count();                            // integer: 120                                         (currently there's 120 cats)
+catz()->count();                            // integer: 128
 ```
 
 **Halt iterating for repeat interactions**
