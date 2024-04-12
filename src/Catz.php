@@ -45,9 +45,7 @@ class Catz
      */
     public function count(): int
     {
-        if ($this->all === null) {
-            $this->load();
-        }
+        $this->all ??= $this->load();
 
         return count($this->all);
     }
@@ -60,9 +58,7 @@ class Catz
      */
     public function get(int $number): string
     {
-        if ($this->all === null) {
-            $this->load();
-        }
+        $this->all ??= $this->load();
 
         return $this->all[$number - 1] ?? throw CatzImageException::make('Unable to find image #'.$number);
     }
@@ -133,7 +129,7 @@ class Catz
     /**
      * Load in all cat pics
      */
-    public function load(): static
+    public function load(): array
     {
         if ($this->all === null) {
             $path = self::absolutePath('');
@@ -153,7 +149,7 @@ class Catz
             ->values()
             ->all();
 
-        return $this;
+        return $this->all;
     }
 
     /**
@@ -173,9 +169,7 @@ class Catz
      */
     public function all(): array
     {
-        if ($this->all === null) {
-            $this->load();
-        }
+        $this->all ??= $this->load();
 
         return $this->all ?? throw CatzImageException::make('Unable to load catz pics');
     }
@@ -185,9 +179,7 @@ class Catz
      */
     public function pool(): array
     {
-        if ($this->all === null) {
-            $this->load();
-        }
+        $this->all ??= $this->load();
 
         return $this->pool ?? throw CatzImageException::make('Unable to load catz pool');
     }
