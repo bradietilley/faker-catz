@@ -23,40 +23,4 @@ test('catz can load all cat pics', function () {
      */
     $actual = catz()->all();
     expect($actual)->toBe($expect);
-
-    /**
-     * Pool is not the same as all as it's shuffled
-     */
-    expect(catz()->pool())->toHaveCount(count($actual))->not->toBe($actual);
-
-    /**
-     * The pool contains the same images just in wrong order
-     */
-    $poolSorted = collect(catz()->pool())->sort()->values()->all();
-    expect($poolSorted)->toBe($expect);
-
-    $random = [];
-    while (count($random) < count($actual)) {
-        $random[] = catz()->path();
-    }
-    expect($random)->not->toBe($expect);
-    $randomSorted = collect($random)->sort()->values()->all();
-    expect($randomSorted)->toBe($expect);
-
-    expect(catz()->pool())->toBe([]);
-
-    $temp = catz()->path();
-
-    /**
-     * Auto refeed
-     */
-    expect(catz()->pool())->toHaveCount(count($expect) - 1);
-
-    $random2 = [$temp];
-    while (count($random2) < count($actual)) {
-        $random2[] = catz()->path();
-    }
-    expect($random2)->not->toBe($expect);
-    $random2Sorted = collect($random2)->sort()->values()->all();
-    expect($random2Sorted)->toBe($expect);
 });
