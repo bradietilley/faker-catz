@@ -60,7 +60,7 @@ class Catz
      */
     public function path(): string
     {
-        return $this->refeed()->iterate()->getCurrentImagePath();
+        return $this->loanWhenEmpty()->iterate()->getCurrentImagePath();
     }
 
     /**
@@ -68,7 +68,7 @@ class Catz
      */
     public function contents(): string
     {
-        return $this->refeed()->iterate()->getCurrentImageContents();
+        return $this->loanWhenEmpty()->iterate()->getCurrentImageContents();
     }
 
     /**
@@ -76,7 +76,7 @@ class Catz
      */
     public function fileinfo(): SplFileInfo
     {
-        return new SplFileInfo($this->path());
+        return $this->loanWhenEmpty()->iterate()->getCurrentImageFileinfo();
     }
 
     /**
@@ -97,6 +97,14 @@ class Catz
     public function getCurrentImageContents(): string
     {
         return file_get_contents($this->getCurrentImagePath()) ?: throw CatzImageException::make('Unable to load catz image content');
+    }
+
+    /**
+     * Get the current iterated image's fileinfo
+     */
+    public function getCurrentImageFileinfo(): SplFileInfo
+    {
+        return new SplFileInfo($this->getCurrentImagePath());
     }
 
     /**
@@ -139,7 +147,7 @@ class Catz
     /**
      * Load in all cat pics if we've run out.
      */
-    public function refeed(): static
+    public function loanWhenEmpty(): static
     {
         if (empty($this->pool)) {
             $this->load();
