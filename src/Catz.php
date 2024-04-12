@@ -128,6 +128,8 @@ class Catz
 
     /**
      * Load in all cat pics
+     *
+     * @return array<int, string> All cat pics
      */
     public function load(): array
     {
