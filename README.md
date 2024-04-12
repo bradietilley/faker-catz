@@ -112,6 +112,12 @@ catz()->loadWhenEmpty();                    // Won't do anything here as there's
 catz()->load();                             // Will reload the pool of cats to be the full collection of cat images. 
 ```
 
+## Roadmap
+
+- May add colour filtering like `catz()->red()->path()` and `catz()->red()->iterate()->getCurrentImagePath()`
+- May add image intervention as an optional dependency for resizing: `catz()->resize(128)->path()`
+- More catz
+
 ## Author
 
 - [Bradie Tilley](https://github.com/bradietilley)
