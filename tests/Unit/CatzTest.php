@@ -60,15 +60,3 @@ test('catz can load all cat pics', function () {
     $random2Sorted = collect($random2)->sort()->values()->all();
     expect($random2Sorted)->toBe($expect);
 });
-
-test('catz can seed consistent results', function () {
-    /**
-     * Pools are randomised each time it's loaded by default
-     */
-    expect(catz()->load()->pool())->not->toBe(catz()->load()->pool());
-
-    /**
-     * Pools are randomised using the seed and thus aren't random anymore
-     */
-    expect(catz()->seed(4353454536)->pool())->toBe(catz()->seed(4353454536)->pool());
-});

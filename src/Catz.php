@@ -33,26 +33,11 @@ class Catz
     protected ?string $current = null;
 
     /**
-     * The seed to use for shuffling profile pics within each pool
-     */
-    protected ?int $seed = null;
-
-    /**
      * Resolve the current instance
      */
     public static function instance(): self
     {
         return static::$instance ??= new self();
-    }
-
-    /**
-     * Set the shuffle seed and update the pool
-     */
-    public function seed(int $seed = null): static
-    {
-        $this->seed = $seed;
-
-        return $this->load();
     }
 
     /**
@@ -164,7 +149,7 @@ class Catz
         }
 
         $this->pool = Collection::make($this->all)
-            ->shuffle($this->seed)
+            ->shuffle()
             ->values()
             ->all();
 
