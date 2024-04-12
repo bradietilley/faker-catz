@@ -15,6 +15,14 @@ All images are 1024*1024 60% quality JPEGs, resulting in 50-130KB per image.
 ![example](docs/example.png)
 
 
+## Repositories
+
+[Imagez](https://github.com/bradietilley/faker-imagez) available:
+
+- [Catz](https://github.com/bradietilley/faker-catz)
+- [Dogz](https://github.com/bradietilley/faker-dogz)
+
+
 ## Installation
 
 ```
