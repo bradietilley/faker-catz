@@ -2,6 +2,7 @@
 
 namespace BradieTilley\Catz;
 
+use BradieTilley\Catz\Exceptions\CatzImageException;
 use Illuminate\Support\Collection;
 
 class Catz
@@ -13,11 +14,15 @@ class Catz
 
     /**
      * The complete set of cats
+     *
+     * @var array<int, string>
      */
     protected ?array $all = null;
 
     /**
      * The current pool of cats
+     *
+     * @var array<int, string>
      */
     protected ?array $pool = null;
 
@@ -70,7 +75,11 @@ class Catz
      */
     public function getCurrentImagePath(): string
     {
-        return $this->current;
+        if ($this->current === null) {
+            $this->next();
+        }
+
+        return $this->current ?? throw CatzImageException::make('Unable to load catz image path');
     }
 
     /**
@@ -78,7 +87,7 @@ class Catz
      */
     public function getCurrentImageContents(): string
     {
-        return file_get_contents($this->current);
+        return file_get_contents($this->getCurrentImagePath()) ?: throw CatzImageException::make('Unable to load catz image content');
     }
 
     /**
@@ -86,6 +95,7 @@ class Catz
      */
     public function next(): static
     {
+        /** @phpstan-ignore-next-line */
         $this->current = array_pop($this->pool);
 
         return $this;
@@ -98,7 +108,7 @@ class Catz
     {
         if ($this->all === null) {
             $path = self::absolutePath('');
-            $pics = scandir($path);
+            $pics = scandir($path) ?: throw CatzImageException::make('Unable to read catz images');
 
             $pics = Collection::make($pics)
                 ->filter(fn (string $file) => $file !== '.' && $file !== '..')
@@ -129,22 +139,28 @@ class Catz
         return $this;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function all(): array
     {
         if ($this->all === null) {
             $this->load();
         }
 
-        return $this->all;
+        return $this->all ?? throw CatzImageException::make('Unable to load catz pics');
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function pool(): array
     {
         if ($this->all === null) {
             $this->load();
         }
 
-        return $this->pool;
+        return $this->pool ?? throw CatzImageException::make('Unable to load catz pool');
     }
 
     public static function absolutePath(string $name): string
